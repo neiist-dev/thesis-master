@@ -1,0 +1,116 @@
+#my-footer {
+  background-color: #182c39;
+  color: white;
+  text-align: center;
+}
+
+Row {
+  margin: 0 85px;
+}
+
+#my-footer .footer-copyright {
+  background-color: #10222e;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  text-align: center;
+}
+
+#my-footer .footer-copyright p {
+  margin: 10px;
+  color: #ccc;
+}
+
+#my-footer ul {
+  list-style-type: none;
+  padding-left: 0;
+  line-height: 1.7;
+}
+
+#my-footer h5 {
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+#my-footer a {
+  color: #d2d1d1;
+  text-decoration: none;
+}
+
+#my-footer a:hover,
+#my-footer a:focus {
+  text-decoration: none;
+  color: white;
+}
+
+#my-footer .social-networks {
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 38px;
+}
+
+#my-footer .fa {
+  /*background-color: white;
+  padding: 20px;
+  font-size: 30px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;*/
+  font-size: 30px;
+  margin-right: 15px;
+  margin-left: 20px;
+  background-color: white;
+  color: #182c39;
+  border-radius: 51%;
+  padding: 10px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 31px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+#my-footer .fa-facebook:hover {
+  color: #2b55ff;
+}
+
+#my-footer .fa-facebook:focus {
+  color: #2b55ff;
+}
+
+#my-footer .fa-linkedin:hover {
+  color: #0077B5;
+}
+
+#my-footer .fa-linkedin:focus {
+  color: #0077B5;
+}
+
+#my-footer .fa-instagram:hover {
+  color: #f56040;
+}
+
+#my-footer .fa-twitch:hover {
+  color: #6441A4;
+}
+
+#my-footer .fa-twitch:focus {
+  color: #6441A4;
+}
+
+@media screen and (max-width: 767px) {
+  #my-footer {
+    text-align: center;
+  }
+  #my-footer .row {
+    margin: 0;
+  }
+}
+
+#refRep {
+  color: antiquewhite;
+  font-size:1.2em;
+}
