@@ -32,13 +32,13 @@
 }
 
 #footer-social .fa{
-  font-size: 2rem;
-  padding: 0.8rem;
+  font-size: 3vw;
+  padding: 1vw;
   border-radius: 50%;
   display: inline-block;
-  width: 4rem;
-  height: 4rem;
-  line-height: 2.5rem;
+  width: 6vw;
+  height: 6vw;
+  line-height: 4vw;
   text-align: center;
   text-decoration: none;
   background-color: white;
