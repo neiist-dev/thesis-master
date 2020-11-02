@@ -45,19 +45,19 @@
   color: #182c39;
 }
 
-#footer-social .fa-facebook:hover {
+#footer-social #fa-facebook:hover {
   color: #2b55ff;
 }
 
-#footer-social .fa-linkedin:hover {
+#footer-social #fa-linkedin:hover {
   color: #0077B5;
 }
 
-#footer-social .fa-instagram:hover {
+#footer-social #fa-instagram:hover {
   color: #f56040;
 }
 
-#footer-social .fa-twitch:hover {
+#footer-social #fa-twitch:hover {
   color: #6441A4;
 }
 
