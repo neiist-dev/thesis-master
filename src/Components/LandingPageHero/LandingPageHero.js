@@ -1,9 +1,9 @@
 import React from 'react';
-import './GCESection.css';
+import './LandingPageHero.css';
 import { ReactComponent as GceLogo } from './gce_logo.svg';
 import { ReactComponent as Arrows } from './arrows.svg';
 
-const HomeSection = () => {
+function LandingPageHero() {
     return (
         <section id="fullscreen_section">
             <div id="content">
@@ -15,9 +15,9 @@ const HomeSection = () => {
                 </a>
             </div>
         </section >
-    )
+    );
 }
 
-export default HomeSection;
+export default LandingPageHero;
 
 
