@@ -1,41 +1,26 @@
-#footer-map{
+footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   background-color: #182c39;
-  text-align: center;
-  padding: 1.2rem 0 0.6rem 0;
-}
-
-#footer-map h5{
-  color: white;
-  font-size: 1.3rem;
-}
-
-#footer-map ul{
-  list-style-type: none;
-  font-size: 1.1rem;
-  padding-left: 0;
-}
-
-#footer-map a{
-  color: #d2d1d1;
-} 
-
-#footer-map a:hover{
-  text-decoration: none;
-  color: white;
+  background-size: cover;
 }
 
 
-
-#footer-social{
-  background-color: #182c39;
-  padding: 0.6rem 0 1.2rem 0;
+#links-circle {
+  display: flex;
+  justify-content: space-around;
+  width: 45%;
 }
 
-#footer-social .fa{
+.fa {
   font-size: 3vw;
-  padding: 1vw;
+  padding-top: 1vw;
+  padding-left: 1rem;
+  padding-right: 1rem;
   border-radius: 50%;
-  display: inline-block;
   width: 6vw;
   height: 6vw;
   line-height: 4vw;
@@ -43,47 +28,33 @@
   text-decoration: none;
   background-color: white;
   color: #182c39;
+  cursor: pointer;
 }
 
-#footer-social #fa-facebook:hover {
+#fa-facebook:hover {
   color: #2b55ff;
 }
 
-#footer-social #fa-linkedin:hover {
+#fa-linkedin:hover {
   color: #0077B5;
 }
 
-#footer-social #fa-instagram:hover {
+#fa-instagram:hover {
   color: #f56040;
 }
 
-#footer-social #fa-twitch:hover {
+#fa-twitch:hover {
   color: #6441A4;
 }
 
-#footer-copyright{
-  font-size: 0.9rem;
-  text-align: center;
-  justify-content: center;
-  background-color: #10222e;
-  color: #ccc;
-  padding: 1.2rem 0 0 0;
+#fa-github:hover {
+  color: black;
 }
 
-#footer-signature{
-  font-size: 0.9rem;
-  text-align: center;
-  justify-content: center;
-  background-color: #10222e;
-  color: #ccc;
-  padding: 0 0 1.2rem 0;
+#fa-envelope:hover {
+  color: #BB001B;
 }
 
-#footer-signature a{
-  color: #d2d1d1;
-}
-
-#footer-signature a:hover{
-  color: white;
-  text-decoration: none;
+a:hover {
+  color: #182c39;
 }

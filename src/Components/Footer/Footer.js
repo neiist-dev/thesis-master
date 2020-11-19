@@ -1,53 +1,55 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React, { useState, useRef } from 'react';
 import './Footer.css';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faLinkedinIn, faInstagram, faTwitch } from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faFacebookF, faLinkedinIn, faInstagram, faTwitch, faGithub } from '@fortawesome/free-brands-svg-icons';
 
-class Footer extends React.Component {
-    render() {
-        return (
-            <Container fluid>
-                <Row id="footer-map">
-                    <Col md={{ span: 2, offset: 2 }}>
-                        <h5>Sobre o GCE </h5>
-                        <ul>
-                            <li><a href="FIXME">A Nossa Missão</a></li>
-                            <li><a href="FIXME">A Equipa</a></li>
-                        </ul>
-                    </Col>
 
-                    <Col md={{ span: 2, offset: 1 }}>
-                        <h5>Suporte</h5>
-                        <ul>
-                            <li><a href="FIXME">FAQ</a></li>
-                            <li><a href="mailto:admin@gce-neiist.org">Contacta-nos</a></li>
-                        </ul>
-                    </Col>
+function Footer() {
+    const [hover, setHover] = useState(false);
+    const [click, setClick] = useState(false);
 
-                    <Col md={{ span: 2, offset: 1 }}>
-                        <h5>Informação Legal</h5>
-                        <ul>
-                            <li><a href="FIXME">Termos de Uso</a></li>
-                            <li><a href="FIXME">Privacidade</a></li>
-                        </ul>
-                    </Col>
-                </Row>
+    return (
+        <footer>
+            <div id="links-circle">
+                <a id="fa-facebook" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/gce.neiist" className="fa"><FontAwesomeIcon icon={faFacebookF} /></a>
+                <a id="fa-instagram" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/gce.neiist" className="fa"><FontAwesomeIcon icon={faInstagram} /></a>
+                <a id="fa-linkedin" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/11163917" className="fa"><FontAwesomeIcon icon={faLinkedinIn} /></a>
+                <a id="fa-twitch" target="_blank" rel="noopener noreferrer" href="https://www.twitch.tv/gce_neiist" className="fa"><FontAwesomeIcon icon={faTwitch} /></a>
+                <a id="fa-github" target="_blank" rel="noopener noreferrer" href="https://github.com/GCE-NEIIST/GCE-NEIIST-webapp" className="fa"><FontAwesomeIcon icon={faGithub} /></a>
+                <OverlayTrigger
+                    show={hover && !click}
+                    onToggle={(show) => {
+                        if (show) {
+                            setHover(true);
+                        } else {
+                            setHover(false);
+                        }
+                    }}
+                    placement="top"
+                    overlay={<Tooltip>Copiar para a área de transferência</Tooltip>}>
+                    <div>
+                        <OverlayTrigger
+                            show={hover && click}
+                            onToggle={(show) => {
+                                if (!show) {
+                                    setClick(false);
+                                    setHover(false);
+                                }
+                            }}
+                            placement="top" overlay={<Tooltip>Copiado ✔️</Tooltip>}>
 
-                <Row id="footer-social">
-                    <Col xs={{ span: 1, offset: 4 }}><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/gce.neiist" className="fa" id="fa-facebook"><FontAwesomeIcon icon={faFacebookF} /></a></Col>
-                    <Col xs={1}><a target="_blank" rel="noopener noreferrer" href="FIXME" className="fa" id="fa-instagram"><FontAwesomeIcon icon={faInstagram} /></a></Col>
-                    <Col xs={1}><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/11163917" className="fa" id="fa-linkedin"><FontAwesomeIcon icon={faLinkedinIn} /></a></Col>
-                    <Col xs={1}><a target="_blank" rel="noopener noreferrer" href="FIXME" className="fa" id="fa-twitch"><FontAwesomeIcon icon={faTwitch} /></a></Col>
-                </Row>
-
-                <Row id="footer-copyright"><p>© 2020 GCE-NEIIST</p></Row>
-                <Row id="footer-signature"><p> Made with ♥ at GCE - open-source code available <a id="refRep" target="_blank" rel="noopener noreferrer" href="FIXME">here</a></p></Row>
-            </Container>
-        )
-    }
+                            <div id="fa-envelope" onClick={() => { navigator.clipboard.writeText("admin@gce-neiist.org"); setClick(true); }} className="fa copy-click">
+                                <FontAwesomeIcon icon={faEnvelope} />
+                            </div>
+                        </OverlayTrigger>
+                    </div>
+                </OverlayTrigger>
+            </div>
+        </footer >
+    );
 }
 
 export default Footer;
