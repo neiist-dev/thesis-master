@@ -3,23 +3,30 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import logo from './logo.png';
 import './NavigationBar.css';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Link } from "react-router-dom";
 
 
 function NavigationBar() {
   return (
-    <Navbar className="our-nav" bg="ligth" expand="lg">
-      <Navbar.Brand href="#home">
-        <img src={logo} width="40" height="40" className="d-inline-block align-top" alt="GCE logo" />
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          <Nav.Link href="#1">ARTIGOS & ENTREVISTAS</Nav.Link>
-          <Nav.Link href="#2">GCE THESIS</Nav.Link>
-        </Nav>
-        <LoginControl></LoginControl>
-      </Navbar.Collapse>
-    </Navbar>
+    <Row>
+      <Col>
+        <Navbar className="our-nav" bg="ligth" expand="lg">
+          <Navbar.Brand as={Link} exact to="/">
+            <img src={logo} width="40" height="40" className="d-inline-block align-top" alt="GCE logo" />
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link as={Link} to="/artigos-entrevistas">ARTIGOS & ENTREVISTAS</Nav.Link>
+              <Nav.Link as={Link} to="/gce-thesis">GCE THESIS</Nav.Link>
+            </Nav>
+            <LoginControl></LoginControl>
+          </Navbar.Collapse>
+        </Navbar>
+      </Col>
+    </Row>
   );
 }
 

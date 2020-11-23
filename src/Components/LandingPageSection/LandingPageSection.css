@@ -1,10 +1,10 @@
 .fullscreen_section {
     height: 100vh;
+    align-content: center;
+    /*
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    align-content: center;
-    /*
     vertical-align: middle;
     display: flex;
     flex-direction: row-reverse;
@@ -15,8 +15,6 @@
 #thesis {
     background: url("thesis_bg.jpg") no-repeat center center fixed;
     background-size: cover;
-    /*
-    */
 }
 
 #hashcode {

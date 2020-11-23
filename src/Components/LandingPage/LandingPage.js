@@ -1,6 +1,4 @@
 import React from 'react';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
 import LandingPageHero from '../LandingPageHero/LandingPageHero';
 import LandingPageSection from '../LandingPageSection/LandingPageSection';
 
