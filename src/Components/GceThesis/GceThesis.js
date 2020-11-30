@@ -1,23 +1,32 @@
 import React from 'react';
 import './GceThesis.css';
+import AreasButtons from '../AreasButtons/AreasButtons';
+import ThesisCards from '../ThesisCards/ThesisCards';
+import teses from './2020-06-09-theses-edit.json';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class GceThesis extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            theses: null /*getThesis()   TODO*/,
+            theses: teses, /*teses getThesis(),   TODO*/
             thesesFiltered: null /*getThesis()   TODO*/
         };
     }
     render() {
         return (
             <>
-                {/*<AreasButtons theses={this.state.theses}></AreasButtons>
+                <h1>{/*this.state.thesesFiltered.length*/}BUÉS propostas de tese</h1>
+                <Row>
+                    {/*theses={this.state.theses}*/}
+                    <AreasButtons></AreasButtons>
+                    <ThesisCards></ThesisCards>
+                    {/*
                 <SearchBar theses={this.state.theses}></SearchBar>
                 <ButtonInstructions></ButtonInstructions>
-                <ThesisCards thesis={this.state.thesesFiltered}></ThesisCards>
                 */}
-                <h1>{/*this.state.thesesFiltered.length*/}BUÉS propostas de tese</h1>
+                </Row>
             </>
         );
     }
