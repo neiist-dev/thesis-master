@@ -1,0 +1,17 @@
+.area-btt {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    height: 50px;
+    text-align: left;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border: 0;
+    outline: none !important;
+    box-shadow: none !important
+}
+
+.area-btt .on {
+    width: 100px !important;
+}
