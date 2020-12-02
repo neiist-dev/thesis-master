@@ -5,11 +5,12 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import './ButtonInstructions.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 
 function ButtonInstructions() {
     return (
-        <Col md={2}>
-            <Button className="instructions-btt"> Instruções</Button>
+        <Col id="instructions-btt-container" md={{ span: 1 }}>
+            <Button id="instructions-btt"> Instruções</Button>
         </Col>
     );
 }
