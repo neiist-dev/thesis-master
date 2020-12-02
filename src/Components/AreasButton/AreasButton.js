@@ -6,7 +6,7 @@ import './AreasButton.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function AreasButton() {
+function AreasButton(props) {
     const [on, setOn] = useState(false);
     const [hover, setHover] = useState(false);
 
@@ -22,7 +22,7 @@ function AreasButton() {
                     }
                 }}
                 placement="right"
-                overlay={<Tooltip>Software Engineering</Tooltip>}>
+                overlay={<Tooltip>{props.area}</Tooltip>}>
                 <div>
                     <OverlayTrigger
                         show={hover && !on}
@@ -33,8 +33,8 @@ function AreasButton() {
                                 setHover(false);
                             }
                         }}
-                        placement="right" overlay={<Tooltip>Software Engineering</Tooltip>}>
-                        <Button style={{ background: "#00FF00", width: on ? "100px" : "55px" }} className="area-btt" onmousehover={() => setHover(true)} onClick={() => setOn(!on)}>SE</Button>
+                    placement="right" overlay={<Tooltip>{props.area}</Tooltip>}>
+                        <Button style={{ background: "#00FF00", width: on ? "100px" : "55px" }} className="area-btt" onmousehover={() => setHover(true)} onClick={() => setOn(!on)}>{props.areaInitials}</Button>
                     </OverlayTrigger>
                 </div>
             </OverlayTrigger>

@@ -2,6 +2,7 @@ import React from 'react';
 import './GceThesis.css';
 import AreasButtons from '../AreasButtons/AreasButtons';
 import ThesisCards from '../ThesisCards/ThesisCards';
+import ButtonInstructions from '../ButtonInstructions/ButtonInstructions';
 import teses from './2020-06-09-theses-edit.json';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -24,8 +25,9 @@ class GceThesis extends React.Component {
                     <ThesisCards></ThesisCards>
                     {/*
                 <SearchBar theses={this.state.theses}></SearchBar>
-                <ButtonInstructions></ButtonInstructions>
                 */}
+                <ButtonInstructions></ButtonInstructions>
+                
                 </Row>
             </>
         );
@@ -33,11 +35,7 @@ class GceThesis extends React.Component {
 }
 
 
-function ButtonInstructions() {
-    return (
-        <button>Instruções</button>
-    );
-}
+
 export default GceThesis;
 
 
