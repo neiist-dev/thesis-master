@@ -15,7 +15,7 @@ function Footer() {
 
     return (
         <Row className="footer">
-            <Col md={{ span: 8, offset: 2 }}>
+            <Col md={{ span: 8 }}>
                 <div id="links-circle">
                     <a id="fa-facebook" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/gce.neiist" className="fa"><FontAwesomeIcon icon={faFacebookF} /></a>
                     <a id="fa-instagram" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/gce.neiist" className="fa"><FontAwesomeIcon icon={faInstagram} /></a>
@@ -33,7 +33,7 @@ function Footer() {
                         }}
                         placement="top"
                         overlay={<Tooltip>Copiar para a área de transferência</Tooltip>}>
-                        <div>
+                        <div id="email-inline-display">
                             <OverlayTrigger
                                 show={hover && click}
                                 onToggle={(show) => {
