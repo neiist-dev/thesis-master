@@ -5,6 +5,10 @@ import logo from './logo.png';
 import './NavigationBar.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
 import { Link } from "react-router-dom";
 
 
@@ -19,9 +23,20 @@ function NavigationBar() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link as={Link} to="/artigos-entrevistas">ARTIGOS & ENTREVISTAS</Nav.Link>
               <Nav.Link as={Link} to="/gce-thesis">GCE THESIS</Nav.Link>
             </Nav>
+            <Form inline>
+              <InputGroup id="search-bar" className="mb-3">
+                <FormControl
+                  placeholder="Recipient's username"
+                  aria-label="Recipient's username"
+                  aria-describedby="basic-addon2"
+                />
+                <InputGroup.Append>
+                  <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
+                </InputGroup.Append>
+              </InputGroup>
+            </Form>
             <LoginControl></LoginControl>
           </Navbar.Collapse>
         </Navbar>
