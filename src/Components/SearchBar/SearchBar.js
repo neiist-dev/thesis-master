@@ -7,18 +7,16 @@ import Col from 'react-bootstrap/Col';
 
 function SearchBar() {
     return (
-        <Col id="search-bar-container" md={{ span: 7, offset: 2 }}>
-            <InputGroup id="search-bar" className="mb-3">
-                <FormControl
-                    placeholder="Recipient's username"
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
-                />
-                <InputGroup.Append>
-                    <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
-                </InputGroup.Append>
-            </InputGroup>
-        </Col>
+        <InputGroup id="search-bar" className="mb-3">
+            <FormControl
+                placeholder="Recipient's username"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+            />
+            <InputGroup.Append>
+                <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
+            </InputGroup.Append>
+        </InputGroup>
     );
 }
 
