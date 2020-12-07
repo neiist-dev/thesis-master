@@ -3,10 +3,10 @@ import './GceThesis.css';
 import AreasButtons from '../AreasButtons/AreasButtons';
 import ThesisCards from '../ThesisCards/ThesisCards';
 import SearchBar from '../SearchBar/SearchBar';
-import ButtonInstructions from '../ButtonInstructions/ButtonInstructions';
 import teses from './2020-06-09-theses-edit.json';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 
 class GceThesis extends React.Component {
     constructor(props) {
@@ -19,14 +19,14 @@ class GceThesis extends React.Component {
     render() {
         return (
             <>
-                <Row>
-                    <SearchBar></SearchBar>
-                    <ButtonInstructions></ButtonInstructions>
-                </Row>
-                <Row>
+                <Row noGutters="true">
                     {/*theses={this.state.theses}*/}
-                    <AreasButtons></AreasButtons>
-                    <ThesisCards></ThesisCards>
+                    <Col md={1}>
+                        <AreasButtons></AreasButtons>
+                    </Col>
+                    <Col md={10}>
+                        <ThesisCards></ThesisCards>
+                    </Col>
                 </Row>
             </>
         );
