@@ -1,25 +1,17 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavigationBar from './Components/NavigationBar/NavigationBar';
-import Footer from './Components/Footer/Footer';
-import './App.css';
+//import Footer from './components/Footer/Footer';
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import GceThesis from './Components/GceThesis/GceThesis';
+import LandingPage from './pages/LandingPage/LandingPage';
+import ThesisMaster from './pages/ThesisMaster/ThesisMaster';
+import './App.css';
 
-function App() {
+export default function App() {
   return (
     <Router>
-      <Container fluid>
-        <NavigationBar />
-        {/*
-        <Route exact path="/" component={LandingPage} />
-        */}
-        <Route path="/gce-thesis" component={GceThesis} />
-        <Footer />
-      </Container>
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/thesis-master" component={ThesisMaster} />
     </Router>
   );
 }
-
-export default App;

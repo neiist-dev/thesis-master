@@ -1,14 +1,15 @@
 import React from 'react';
-import './GceThesis.css';
-import AreasButtons from '../AreasButtons/AreasButtons';
-import ThesisCards from '../ThesisCards/ThesisCards';
-import SearchBar from '../SearchBar/SearchBar';
+import AreasButtons from '../../components/AreasButtons/AreasButtons';
+import ThesisCards from '../../components/ThesisCards/ThesisCards';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import NavigationBar from '../../components/NavigationBar/NavigationBar';
 import teses from './2020-06-09-theses-edit.json';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+import './ThesisMaster.css';
 
-class GceThesis extends React.Component {
+class ThesisMaster extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +20,7 @@ class GceThesis extends React.Component {
     render() {
         return (
             <>
+                <NavigationBar />
                 <Row noGutters="true">
                     {/*theses={this.state.theses}*/}
                     <Col md={1}>
@@ -35,6 +37,6 @@ class GceThesis extends React.Component {
 
 
 
-export default GceThesis;
+export default ThesisMaster;
 
 
