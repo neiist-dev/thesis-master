@@ -5,8 +5,8 @@ import './LandingPage.css';
 export default function LandingPage() {
     return (
         <div>
-            <div style={{position: "relative", width: "1440px", height: "1024px", background: "#000B71"}}>
-                <button style={{position: "absolute",width: "111px", height: "111px",left: "1311px",top: "20px", border: "1px solid #FFFFFF", boxSizing: "border-box"}}>
+            <div style={{display: "flex", justifyContent: "flex-end" }}>
+                <button style={{ border: 0, outline: "none", padding: "10px", backgroundColor: "transparent" }}>
                     <img src={logo} />
                 </button>
             </div>
