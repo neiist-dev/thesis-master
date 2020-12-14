@@ -3,15 +3,12 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import './AreasButton.css';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
-function AreasButton({ area, areaInitials, colorHEX }) {
+export default function AreasButton({ area, areaInitials, colorHEX }) {
     const [on, setOn] = useState(false);
     const [hover, setHover] = useState(false);
 
     return (
-        <Row className="area-btt-row">
             <OverlayTrigger
                 show={hover && on}
                 onToggle={(show) => {
@@ -38,8 +35,5 @@ function AreasButton({ area, areaInitials, colorHEX }) {
                     </OverlayTrigger>
                 </div>
             </OverlayTrigger>
-        </Row >
     );
 }
-
-export default AreasButton;
