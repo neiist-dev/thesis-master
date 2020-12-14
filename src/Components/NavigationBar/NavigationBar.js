@@ -14,8 +14,6 @@ import './NavigationBar.css';
 
 function NavigationBar() {
   return (
-    <Row>
-      <Col>
         <Navbar className="our-nav" bg="ligth" expand="lg">
           <Navbar.Brand as={Link} exact to="/">
             <img src={logo} width="40" height="40" className="d-inline-block align-top" alt="GCE logo" />
@@ -40,8 +38,6 @@ function NavigationBar() {
             <LoginControl></LoginControl>
           </Navbar.Collapse>
         </Navbar>
-      </Col>
-    </Row>
   );
 }
 
