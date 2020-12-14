@@ -21,15 +21,11 @@ class ThesisMaster extends React.Component {
         return (
             <>
                 <NavigationBar />
-                <Row noGutters="true">
-                    {/*theses={this.state.theses}*/}
-                    <Col md={1}>
-                        <AreasButtons></AreasButtons>
-                    </Col>
-                    <Col md={10}>
-                        <ThesisCards></ThesisCards>
-                    </Col>
-                </Row>
+                {/*theses={this.state.theses}*/}
+                <div style={{display: "grid", gridTemplateColumns: "110px auto"}}>
+                    <AreasButtons></AreasButtons>
+                    <ThesisCards></ThesisCards>
+                </div>
             </>
         );
     }
