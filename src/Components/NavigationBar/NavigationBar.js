@@ -1,22 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { Link } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import logo from './logo.png';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import placeholder from './placeholder.svg';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { Link } from "react-router-dom";
 import './NavigationBar.css';
 
 
-function NavigationBar() {
+export default function NavigationBar({isLoggedIn, setLoggedIn, userName, setUserName}) {
   return (
         <Navbar className="our-nav" bg="ligth" expand="lg">
           <Navbar.Brand as={Link} exact to="/">
-            <img src={logo} width="40" height="40" className="d-inline-block align-top" alt="GCE logo" />
+            <img src={placeholder} width="40" height="40" className="d-inline-block align-top" alt="GCE logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -35,78 +33,34 @@ function NavigationBar() {
                 </InputGroup.Append>
               </InputGroup>
             </Form>
-            <LoginControl></LoginControl>
+            <LoginControl isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} setUserName={setUserName}/>
           </Navbar.Collapse>
         </Navbar>
   );
 }
 
-
-
-function LoginButton(props) {
+function LoginButton({setLoggedIn, setUserName}) {
   return (
-    <div className="our-nav" onClick={props.onClick}>
-      <Nav.Link href="#4">LOGIN</Nav.Link>
+    <div className="our-nav" onClick={() => {setLoggedIn(true); setUserName("ProfJam");}}>
+      <Nav.Link as={Link} to="/thesis-master">LOGIN</Nav.Link>
     </div>
   );
 }
 
-function LogoutButton(props) {
+function LogoutButton({setLoggedIn}) {
   return (
-    <div className="our-nav" onClick={props.onClick}>
-      <Nav.Link href="#4">LOGOUT</Nav.Link>
+    <div className="our-nav" onClick={() => {setLoggedIn(false);}}>
+      <Nav.Link as={Link} exact to="/">LOGOUT</Nav.Link>
     </div>
   );
 }
 
-function Greeting(props) {
-  const isLoggedIn = props.isLoggedIn;
-  const studentName = props.studentName;
-  if (isLoggedIn) {
-    return (
-      <Nav.Link href="#3">{studentName}</Nav.Link>
-    );
-  }
-  return null;
+function LoginControl({isLoggedIn, setLoggedIn, userName, setUserName}) {
+
+  return (
+  <Nav className="ml-auto">
+    {isLoggedIn && <Nav.Link>{userName}</Nav.Link>}
+    {isLoggedIn ? <LogoutButton setLoggedIn={setLoggedIn}/> : <LoginButton setLoggedIn={setLoggedIn} setUserName={setUserName}/>}
+  </Nav>
+  );
 }
-
-
-class LoginControl extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.state = { isLoggedIn: false, studentName: null };
-  }
-
-  handleLoginClick() {
-    //TODO ir ao fenix mandar grande login
-    this.setState({ isLoggedIn: true, studentName: "ProfJam" });
-  }
-
-  handleLogoutClick() {
-    this.setState({ isLoggedIn: false, studentName: null });
-  }
-
-  render() {
-    const isLoggedIn = this.state.isLoggedIn;
-    const studentName = this.state.studentName;
-    let button;
-    if (isLoggedIn) {
-      button = <LogoutButton onClick={this.handleLogoutClick} />;
-    } else {
-      button = <LoginButton onClick={this.handleLoginClick} />;
-    }
-
-    return (
-      <Nav className="ml-auto">
-        <Greeting isLoggedIn={isLoggedIn} studentName={studentName} />
-        {button}
-      </Nav>
-    );
-  }
-}
-
-
-
-export default NavigationBar;
