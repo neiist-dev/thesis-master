@@ -1,7 +1,7 @@
 import React from 'react';
 import AreasButtons from '../../components/AreasButtons/AreasButtons';
 import ThesisCards from '../../components/ThesisCards/ThesisCards';
-import NavigationBar from '../../components/NavigationBar/NavigationBar';
+import NavigationBar from '../../components/NavBar/NavBar';
 import teses from './2020-06-09-theses-edit.json';
 import './ThesisMaster.css';
 

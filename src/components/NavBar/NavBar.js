@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
-import './NavigationBar.css';
+import './NavBar.css';
 
 
 export default function NavigationBar({isLoggedIn, setLoggedIn, userName, setUserName}) {
