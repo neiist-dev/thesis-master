@@ -10,12 +10,12 @@ export default function NavigationBar({isLoggedIn, setLoggedIn, userName, setUse
   return (
         <Navbar className="our-nav" bg="light" expand="lg">
           <Navbar.Brand as={Link} to="/">
-            <img src={placeholder} width="40" height="40" className="d-inline-block align-top" alt="GCE logo" />
+            <img src={placeholder} width="40" height="40" className="d-inline-block align-top"/>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link as={Link} to="/thesis-master">GCE THESIS</Nav.Link>
+              <Nav.Link as={Link} to="/thesis-master">THESIS MASTER</Nav.Link>
             </Nav>
             <LoginControl isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} setUserName={setUserName}/>
           </Navbar.Collapse>
