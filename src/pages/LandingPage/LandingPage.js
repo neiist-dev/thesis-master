@@ -6,9 +6,9 @@ import placeholder from './placeholder.svg';
 import ist from './ist.png';
 import './LandingPage.css';
 
-export default function LandingPage({isLoggedIn, setLoggedIn, userName, setUserName}) {
+export default function LandingPage({ isLoggedIn, setLoggedIn, userName, setUserName }) {
     return (
-        <div class="landing-page">
+        <div className="landing-page">
             <NavBar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} setUserName={setUserName} />
             {/* {isLoggedIn &&
             <>
@@ -18,12 +18,12 @@ export default function LandingPage({isLoggedIn, setLoggedIn, userName, setUserN
             </button>
             </>
             } */}
-            <div class="landing-page__info">
+            <div className="landing-page__info">
                 <section className="landing-page__info--heading">
-                    <h1 class="landing-page__info--heading-primary">
+                    <h1 className="landing-page__info--heading-primary">
                         <span>MASTER</span><span>THESIS</span>
                     </h1>
-                    <span class="landing-page__info--heading-logo">
+                    <span className="landing-page__info--heading-logo">
                         <img src={placeholder} />
                     </span>
                 </section>

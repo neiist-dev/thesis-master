@@ -1,14 +1,12 @@
-const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+const FENIX_CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+const FENIX_REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 
-router.get('/', (req, res) => {
-  res.redirect([
-    'https://fenix.tecnico.ulisboa.pt/oauth/userdialog',
-    `?client_id=${FENIX_CLIENT_ID}`,
-    `&redirect_uri=${FENIX_REDIRECT_URI}`,
-  ].join(''));
-});
+export const loginUrl =
+  'https://fenix.tecnico.ulisboa.pt/oauth/userdialog' +
+  `?client_id=${FENIX_CLIENT_ID}` +
+  `&redirect_uri=${FENIX_REDIRECT_URI}`;
 
+{/*
 router.get('/authorize', async (req, res, next) => {
   const code = req.query.code;
 
@@ -23,7 +21,7 @@ router.get('/authorize', async (req, res, next) => {
       `&grant_type=authorization_code`
     ].join(''));
 
-    if(response === undefined || response.status != 200) {
+    if (response === undefined || response.status != 200) {
       res.redirect("/oopsie");
       return;
     }
@@ -34,10 +32,11 @@ router.get('/authorize', async (req, res, next) => {
 
 
   const token = response.data.access_token;
-  
+
   try {
     var userInfo = await RegisterFenixServices.get_user_info(token);
   } catch (error) {
     res.redirect("/oopsie");
     return;
   }
+*/}
