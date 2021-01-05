@@ -1,8 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 import LandingPage from './pages/LandingPage/LandingPage';
 import ThesisMaster from './pages/ThesisMaster/ThesisMaster';
+import AuthPage from './pages/AuthPage/AuthPage';
 import './App.css';
 
 export default function App() {
@@ -11,21 +17,27 @@ export default function App() {
 
   return (
     <Router>
+      <Switch>
 
-      {isLoggedIn &&
-      <Route path="/thesis-master">
-        <ThesisMaster isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} setUserName={setUserName}/>
-      </Route>
-      }
+        <Route exact path="/">
+          <LandingPage isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} setUserName={setUserName} />
+        </Route>
 
-      <Route path="/">
-        <LandingPage isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} setUserName={setUserName}/>
-      </Route>
+        <Route path="/authorize">
+          <AuthPage />
+        </Route>
 
-      <Route path="*">
-        <Redirect to="/" />
-      </Route>
-      
+        {isLoggedIn &&
+          <Route path="/thesis-master">
+            <ThesisMaster isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} setUserName={setUserName} />
+          </Route>
+        }
+
+        <Route path="*">
+          <Redirect to="/" />
+        </Route>
+
+      </Switch>
     </Router>
   );
 }
