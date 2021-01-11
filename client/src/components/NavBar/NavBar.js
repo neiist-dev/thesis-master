@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import placeholder from './placeholder.svg';
-import { loginUrl } from '../../login';
 import './NavBar.css';
 
 export default function NavigationBar({ isLoggedIn, setLoggedIn, userName, setUserName }) {
@@ -26,7 +25,7 @@ export default function NavigationBar({ isLoggedIn, setLoggedIn, userName, setUs
 function LoginButton({ setLoggedIn, setUserName }) {
   return (
     <div className="our-nav" onClick={() => { setLoggedIn(true); setUserName("ProfJam"); }}>
-      <a href={loginUrl}>LOGIN</a>
+      <a href="/">LOGIN</a> {/*FIXME*/}
     </div>
   );
 }

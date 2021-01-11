@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import {
     useLocation
 } from "react-router-dom";
-import { accessTokenUrl } from '../../login';
-//import axios from 'axios';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -23,8 +21,8 @@ const AuthPage = () => {
     //axios.post(accessTokenUrl(query.get("code")))
     //   .then(console.log())
 
-    fetch(accessTokenUrl(query.get("code")), requestOptions)
-        .then(response => console.log(response))
+    //fetch(accessTokenUrl(query.get("code")), requestOptions)
+    //.then(response => console.log(response))
 
     return (
         <h1>Hello</h1>
