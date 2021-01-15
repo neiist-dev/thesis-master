@@ -22,8 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "proxy": "lcp --origin http://localhost:3000 --proxyUrl https://fenix.tecnico.ulisboa.pt"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
