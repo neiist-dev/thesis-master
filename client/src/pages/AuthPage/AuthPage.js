@@ -1,32 +1,38 @@
-import React, { useEffect } from 'react';
-import {
-    useLocation
-} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useLocation, Redirect } from "react-router-dom";
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
+const useQuery = () => new URLSearchParams(useLocation().search);
 
-const AuthPage = () => {
+const AuthPage = ({ setUserName }) => {
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+
     let query = useQuery();
-    if (query.get("error")) { //do something
-        return <h1>Error</h1>;
-    };
-    console.log(query.get("code"));
+    if (query.get("error"))
+        return <h1>Error</h1>; //do something
 
-    const requestOptions = {
-        method: 'POST'
-    };
+    const code = query.get("code");
 
-    //axios.post(accessTokenUrl(query.get("code")))
-    //   .then(console.log())
+    fetch(`http://localhost:5000/authorize?code=${code}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.isCurrentLMeicStudent)
+                setUserName(data.userName)
+            setIsLoaded(true);
+        },
+            (error) => {
+                setIsLoaded(true);
+                setError(error);
+            }
+        )
 
-    //fetch(accessTokenUrl(query.get("code")), requestOptions)
-    //.then(response => console.log(response))
-
-    return (
-        <h1>Hello</h1>
-    );
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+        return <div>Loading...</div>;
+    } else {
+        return <Redirect to="/thesis-master" />
+    }
 }
 
 export default AuthPage;

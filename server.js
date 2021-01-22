@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const axios = require('axios')
 const path = require('path');
 const { response } = require('express');
@@ -6,8 +7,10 @@ require('dotenv').config()
 
 const app = express();
 
+app.use(cors());
+
 /* https://github.com/hemakshis/Basic-MERN-Stack-App/blob/master/app.js */
-//app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 const {
     FENIX_CLIENT_ID,
@@ -15,8 +18,8 @@ const {
     FENIX_REDIRECT_URI
 } = process.env
 
-app.get('/login', (req, res) => {
-    res.redirect(
+app.get('/get-login-url', (req, res) => {
+    res.send(
         'https://fenix.tecnico.ulisboa.pt/oauth/userdialog' +
         `?client_id=${FENIX_CLIENT_ID}` +
         `&redirect_uri=${FENIX_REDIRECT_URI}`
@@ -38,7 +41,6 @@ app.get('/authorize', async (req, res, next) => {
             '&grant_type=authorization_code'
         );
         if (response === undefined || response.status != 200) {
-            console.log(error);
             res.redirect("/error");
             return;
         }
@@ -57,7 +59,6 @@ app.get('/authorize', async (req, res, next) => {
             `?access_token=${accessToken}`
         );
         if (response === undefined || response.status != 200) {
-            console.log(error);
             res.redirect("/error");
             return;
         }
@@ -68,6 +69,10 @@ app.get('/authorize', async (req, res, next) => {
     }
 
     const personInformation = response;
+
+    let userName = personInformation.data.displayName;
+    console.log("userName:", userName);
+
     console.log("personInformation:", personInformation.data.roles);
 
     let isCurrentLMeicStudent = false;
@@ -85,7 +90,10 @@ app.get('/authorize', async (req, res, next) => {
     console.log("isCurrentLMeicStudent:", isCurrentLMeicStudent);
 
     if (isCurrentLMeicStudent) {
-        res.redirect("/done");
+        res.json({
+            userName: userName,
+            isCurrentLMeicStudent: isCurrentLMeicStudent
+        });
         return;
     }
     else {
@@ -94,6 +102,6 @@ app.get('/authorize', async (req, res, next) => {
     }
 })
 
-app.listen(3000, () => {
-    console.log('app is running on port 3000');
+app.listen(5000, () => {
+    console.log('app is running on port 5000');
 })

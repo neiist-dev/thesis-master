@@ -12,8 +12,14 @@ import AuthPage from './pages/AuthPage/AuthPage';
 import './App.css';
 
 export default function App() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  let isLoggedIn = (localStorage.getItem('isLoggedIn') === 'true');
+  const setLoggedIn = value => {
+    isLoggedIn = value;
+    localStorage.setItem('isLoggedIn', value.toString());
+  }
+
   const [userName, setUserName] = useState(null);
+
 
   return (
     <Router>
@@ -24,7 +30,7 @@ export default function App() {
         </Route>
 
         <Route path="/authorize">
-          <AuthPage />
+          <AuthPage setUserName={setUserName} />
         </Route>
 
         {isLoggedIn &&
