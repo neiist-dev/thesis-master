@@ -26,16 +26,16 @@ export default function App() {
       <Switch>
 
         <Route exact path="/">
-          <LandingPage isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} setUserName={setUserName} />
+          <LandingPage isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} />
         </Route>
 
         <Route path="/authorize">
-          <AuthPage setUserName={setUserName} />
+          <AuthPage setLoggedIn={setLoggedIn} setUserName={setUserName} />
         </Route>
 
         {isLoggedIn &&
           <Route path="/thesis-master">
-            <ThesisMaster isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} setUserName={setUserName} />
+            <ThesisMaster isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} />
           </Route>
         }
 

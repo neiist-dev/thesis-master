@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
-import logout from './logout.svg';
 import placeholder from './placeholder.svg';
-import ist from './ist.png';
 import './LandingPage.css';
 
 export default function LandingPage({ isLoggedIn, setLoggedIn, userName, setUserName }) {
@@ -24,7 +21,7 @@ export default function LandingPage({ isLoggedIn, setLoggedIn, userName, setUser
                         <span>MASTER</span><span>THESIS</span>
                     </h1>
                     <span className="landing-page__info--heading-logo">
-                        <img src={placeholder} />
+                        <img src={placeholder} alt="" />
                     </span>
                 </section>
                 {/* <span>

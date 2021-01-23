@@ -89,17 +89,10 @@ app.get('/authorize', async (req, res, next) => {
 
     console.log("isCurrentLMeicStudent:", isCurrentLMeicStudent);
 
-    if (isCurrentLMeicStudent) {
-        res.json({
-            userName: userName,
-            isCurrentLMeicStudent: isCurrentLMeicStudent
-        });
-        return;
-    }
-    else {
-        res.redirect("/failed");
-        return;
-    }
+    res.json({
+        userName: userName,
+        isCurrentLMeicStudent: isCurrentLMeicStudent
+    });
 })
 
 app.listen(5000, () => {

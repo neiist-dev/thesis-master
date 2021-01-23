@@ -1,13 +1,11 @@
 import React from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './ThesisCards.css';
 
 function ThesisCards() {
     return (
-        <div style={{display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))"}}>
+        <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" }}>
             <Card style={{ width: '16rem' }}>
                 <Card.Img variant="top" src="holder.js/100px180" />
                 <Card.Body>
