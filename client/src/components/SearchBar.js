@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
-import './SearchBar.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 

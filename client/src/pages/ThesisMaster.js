@@ -1,9 +1,8 @@
 import React from 'react';
-import AreasButtons from '../../components/AreasButtons/AreasButtons';
-import ThesisCards from '../../components/ThesisCards/ThesisCards';
-import NavigationBar from '../../components/NavBar/NavBar';
+import AreasButtons from '../components/AreasButtons';
+import ThesisCards from '../components/ThesisCards';
+import NavigationBar from '../components/NavBar';
 //import teses from './2020-06-09-theses-edit.json';
-import './ThesisMaster.css';
 
 export default function ThesisMaster({ isLoggedIn, setLoggedIn, userName, setUserName }) {
     return (

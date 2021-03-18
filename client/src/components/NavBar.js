@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import placeholder from './placeholder.svg';
-//import './NavBar.css';
+//import placeholder from './placeholder.svg';
+import logo from '../images/logo-colors-light-background.png'
 
 const NavigationBar = ({ isLoggedIn, setLoggedIn, userName, setUserName }) =>
-  <Navbar className="our-nav" bg="light" expand="lg">
+  <Navbar bg="light" expand="lg">
     <Navbar.Brand as={Link} to="/">
-      <img src={placeholder} width="40" height="40" className="d-inline-block align-top" alt="" />
+      <img src={logo} width="40" height="40" className="d-inline-block align-top" alt="" />
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
