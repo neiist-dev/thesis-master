@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-//import placeholder from './placeholder.svg';
-import logo from '../images/logo-colors-light-background.png'
+import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom"
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import logo from '../images/logo-color.png'
 
 const NavigationBar = ({ isLoggedIn, setLoggedIn, userName, setUserName }) =>
   <Navbar bg="light" expand="lg">

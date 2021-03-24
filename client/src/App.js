@@ -12,7 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 const App = () => {
-  let isLoggedIn = (localStorage.getItem('isLoggedIn') === 'true')
+  let isLoggedIn = true //FIXME
+  //let isLoggedIn = (localStorage.getItem('isLoggedIn') === 'true')
   const setLoggedIn = value => {
     isLoggedIn = value
     localStorage.setItem('isLoggedIn', value.toString())
