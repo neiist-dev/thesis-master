@@ -4,9 +4,9 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 //import teses from './2020-06-09-theses-edit.json';
 
-const ThesisMaster = ({ isLoggedIn, setLoggedIn, userName, setUserName }) =>
+const ThesisMaster = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) =>
     <>
-        <NavigationBar isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} setUserName={setUserName} />
+        <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
         <div style={{ display: "flex", justifyContent: "center", alignContent: "space-around", flexWrap: "wrap", padding: "10px" }}>
             <ThesisCard title="placeholder" colorLeft="red" colorRight="green" />
             <ThesisCard />

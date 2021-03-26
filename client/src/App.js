@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,33 +6,42 @@ import {
   Redirect
 } from "react-router-dom"
 import LandingPage from './pages/LandingPage'
-import ThesisMaster from './pages/ThesisMaster'
+import LoginPage from './pages/LoginPage'
 import AuthPage from './pages/AuthPage'
+import ThesisMaster from './pages/ThesisMaster'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 const App = () => {
-  let isLoggedIn = true //FIXME
-  //let isLoggedIn = (localStorage.getItem('isLoggedIn') === 'true')
-  const setLoggedIn = value => {
+  let isLoggedIn = (localStorage.getItem('isLoggedIn') === 'true')
+
+  const setIsLoggedIn = value => {
     isLoggedIn = value
-    localStorage.setItem('isLoggedIn', value.toString())
+    localStorage.isLoggedIn = value.toString()
   }
 
-  const [userName, setUserName] = useState(null)
+  let userName = (localStorage.getItem('userName') === 'true')
+
+  const setUserName = value => {
+    userName = value
+    localStorage.userName = value.toString()
+  }
 
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <LandingPage isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} />
+          <LandingPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
         </Route>
-        <Route path="/authorize">
-          <AuthPage setLoggedIn={setLoggedIn} setUserName={setUserName} />
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+        <Route path="/auth">
+          <AuthPage setIsLoggedIn={setIsLoggedIn} setUserName={setUserName} />
         </Route>
         {isLoggedIn &&
           <Route path="/thesis-master">
-            <ThesisMaster isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} userName={userName} />
+            <ThesisMaster isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
           </Route>
         }
         <Route path="*">
