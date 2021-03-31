@@ -2,8 +2,10 @@ const express = require('express')
 const cors = require('cors')
 const axios = require('axios')
 const path = require('path')
-const { response } = require('express')
+//const { response } = require('express')
 require('dotenv').config()
+
+const classifiedTheses = require('./classifiedTheses.json')
 
 const app = express();
 
@@ -102,6 +104,11 @@ app.get('/auth', async (req, res, next) => {
     })
 })
 
-app.listen(5000, () => {
-    console.log('app is running on port 5000')
+app.get('/theses', (req, res) => {
+    console.log(classifiedTheses)
+    res.json(classifiedTheses)
+})
+
+app.listen(5000, async () => {
+    console.log('App is running on port 5000.')
 })
