@@ -12,7 +12,7 @@ const NavigationBar = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) =>
     <Navbar.Collapse id="basic-navbar-nav">
       {isLoggedIn &&
         <Nav className="mr-auto">
-          <Nav.Link href="/thesis-master">THESIS MASTER</Nav.Link>
+          <Nav.Link href="/theses">THESIS MASTER</Nav.Link>
         </Nav>
       }
       <Nav className="ml-auto">

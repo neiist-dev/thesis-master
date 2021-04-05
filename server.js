@@ -5,7 +5,8 @@ const path = require('path')
 //const { response } = require('express')
 require('dotenv').config()
 
-const classifiedTheses = require('./classifiedTheses.json')
+const theses = require('./data/meic_theses.json')
+const areas = require('./data/meic_areas.json')
 
 const app = express();
 
@@ -105,8 +106,44 @@ app.get('/auth', async (req, res, next) => {
 })
 
 app.get('/theses', (req, res) => {
-    console.log(classifiedTheses)
-    res.json(classifiedTheses)
+    let queryAreas = req.query.area
+    console.log("queryAreas:", queryAreas)
+
+    if (queryAreas === undefined)
+        return res.json(theses)
+
+    if (!Array.isArray(queryAreas)) queryAreas = new Array(queryAreas)
+
+    /*if (!Array.isArray(queryAreasCodes)) {
+        const queryAreaCode = queryAreasCodes
+        return res.json(theses.filter(thesis => {
+            const thesisAreasCodes = thesis.areas.map(thesisAreaLong => {
+                const matchingArea = areas.find(area => area.long === thesisAreaLong)
+                return matchingArea.code
+            })
+            return thesisAreasCodes.includes(queryAreaCode)
+        }))
+    }*/
+
+    const filteredTheses = theses.filter(thesis => queryAreas.every(area => thesis.areas.includes(area)))
+    console.log(filteredTheses)
+
+    return res.json(filteredTheses)
+})
+
+app.get('/thesis/:id', (req, res) => {
+    const id = req.params.id
+    console.log("id:", id)
+
+    let particularThesis = theses.find(thesis => thesis.id === id)
+    console.log(particularThesis)
+
+    res.json(particularThesis)
+})
+
+app.get('/areas', (req, res) => {
+    //console.log(areas)
+    res.json(areas)
 })
 
 app.listen(5000, async () => {
