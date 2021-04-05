@@ -15,14 +15,23 @@ const ThesisPage = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) => {
 
 const Thesis = ({ id }) => {
     const [thesis, setThesis] = useState(null)
+    const [areas, setAreas] = useState(null)
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         fetch(`http://localhost:5000/thesis/${id}`)
             .then(res => res.json())
+            .then(res => setThesis(res),
+                (err) => {
+                    setIsLoaded(true)
+                    setError(err)
+                }
+            )
+        fetch('http://localhost:5000/areas')
+            .then(res => res.json())
             .then(res => {
-                setThesis(res)
+                setAreas(res)
                 setIsLoaded(true)
             },
                 (err) => {
@@ -58,7 +67,10 @@ const Thesis = ({ id }) => {
                     <Card.Text as="h5" >Status</Card.Text>
                     <Card.Text>{thesis.status}</Card.Text>
                     <Card.Text as="h5" >Areas</Card.Text>
-                    {thesis.areas.map(area => <Card.Text>{area}</Card.Text>)}
+                    {thesis.areas.map(thesisArea => {
+                        const areaInfo = areas.find(area => area.code === thesisArea)
+                        return <Card.Text>{areaInfo.long}</Card.Text>
+                    })}
                 </Card.Body>
             </Card >
         </div>

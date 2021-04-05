@@ -74,11 +74,11 @@ const Areas = () => {
                     <ToggleButton
                         key={area.code}
                         type="checkbox"
-                        checked={isCheckedArray[index] || false}
+                        checked={isCheckedArray[index]}
                         onChange={() => handleChange(index)}
                         style={{ margin: "10px", width: "15rem", display: "flex", justifyContent: "center", alignItems: "center" }}
                     >
-                        {area.short}
+                        {area.long}
                     </ToggleButton>
                 )
             }
@@ -109,19 +109,22 @@ const Theses = () => {
     if (!isLoaded) return <div>Loading...</div>
     if (error) return <div>Error: {error.message}</div>
     if (classifiedTheses) return (
-        <div style={{ display: "flex", justifyContent: "center", alignContent: "space-around", flexWrap: "wrap", padding: "0 10px 10px 10px" }}>
-            {
-                classifiedTheses.map(thesis =>
-                    <ThesisCard
-                        key={thesis.id}
-                        id={thesis.id}
-                        title={thesis.title}
-                        area1={thesis.areas[0]}
-                        area2={thesis.areas[1]}
-                    />
-                )
-            }
-        </div>
+        <>
+            <h1 style={{ textAlign: "center", margin: 0 }}>{classifiedTheses.length} Propostas de Tese</h1>
+            <div style={{ display: "flex", justifyContent: "center", alignContent: "space-around", flexWrap: "wrap", padding: "0 10px 10px 10px" }}>
+                {
+                    classifiedTheses.map(thesis =>
+                        <ThesisCard
+                            key={thesis.id}
+                            id={thesis.id}
+                            title={thesis.title}
+                            area1={thesis.areas[0]}
+                            area2={thesis.areas[1]}
+                        />
+                    )
+                }
+            </div>
+        </>
     )
 }
 
@@ -129,8 +132,6 @@ const ThesisCard = ({ id, title, area1, area2 }) =>
     <Card style={{ margin: "10px", width: "15rem", textAlign: "center" }}>
         <Card.Body>
             <Card.Title>{title}</Card.Title>
-            <Card.Text>{area1}</Card.Text>
-            <Card.Text>{area2}</Card.Text>
             <a href={`/thesis/${id}`} className="stretched-link" target="_blank" rel="noreferrer" />
         </Card.Body>
     </Card >
