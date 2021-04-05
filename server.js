@@ -114,17 +114,6 @@ app.get('/theses', (req, res) => {
 
     if (!Array.isArray(queryAreas)) queryAreas = new Array(queryAreas)
 
-    /*if (!Array.isArray(queryAreasCodes)) {
-        const queryAreaCode = queryAreasCodes
-        return res.json(theses.filter(thesis => {
-            const thesisAreasCodes = thesis.areas.map(thesisAreaLong => {
-                const matchingArea = areas.find(area => area.long === thesisAreaLong)
-                return matchingArea.code
-            })
-            return thesisAreasCodes.includes(queryAreaCode)
-        }))
-    }*/
-
     const filteredTheses = theses.filter(thesis => queryAreas.every(area => thesis.areas.includes(area)))
     console.log(filteredTheses)
 

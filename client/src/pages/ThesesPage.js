@@ -20,9 +20,17 @@ const Areas = () => {
     useEffect(() => {
         fetch('http://localhost:5000/areas')
             .then(res => res.json())
-            .then(res => {
-                setAreas(res)
-                setIsCheckedArray(Array(res.length).fill(false))
+            .then(areasRes => {
+                setAreas(areasRes)
+
+                const urlParams = new URLSearchParams(window.location.search)
+                const urlAreaParams = urlParams.getAll("area")
+                console.log("urlAreaParams:", urlAreaParams)
+
+                let isCheckedArrayTemp = areasRes.map(area => urlAreaParams.includes(area.code) ? true : false)
+                console.log("isCheckedArrayTemp:", isCheckedArrayTemp)
+                setIsCheckedArray(isCheckedArrayTemp)
+
                 setIsLoaded(true)
             },
                 (err) => {
@@ -33,14 +41,27 @@ const Areas = () => {
     }, [])
 
     const handleChange = index => {
-        let newIsCheckedStateArray = isCheckedArray.slice()
-        newIsCheckedStateArray[index] = !newIsCheckedStateArray[index]
-        setIsCheckedArray(newIsCheckedStateArray)
-        if (newIsCheckedStateArray[index] === true) {
+        const changedArea = areas[index].code
+        let isCheckedStateArrayNew = isCheckedArray.slice()
+        isCheckedStateArrayNew[index] = !isCheckedStateArrayNew[index]
+        setIsCheckedArray(isCheckedStateArrayNew)
+        if (isCheckedStateArrayNew[index]) {
             const urlParams = new URLSearchParams(window.location.search)
-            urlParams.append("area", areas[index].code)
+            const urlAreaParams = urlParams.getAll("area")
+            if (!urlAreaParams.includes(changedArea)) {
+                urlParams.append("area", areas[index].code)
+                console.log(urlParams.toString())
+                window.location.href = window.location.href.split('?')[0] + "?" + urlParams.toString()
+            }
+        }
+        if (!isCheckedStateArrayNew[index]) {
+            const urlParams = new URLSearchParams(window.location.search)
+            let urlAreaParams = urlParams.getAll("area")
+            let urlAreaParamsNew = urlAreaParams.filter(area => area !== changedArea)
+            urlParams.delete("area")
+            urlAreaParamsNew.forEach(areaParam => urlParams.append("area", areaParam))
             console.log(urlParams.toString())
-            window.location.href = window.location + "?" + urlParams.toString()
+            window.location.href = urlParams.toString() === "" ? window.location.href.split('?')[0] : window.location.href.split('?')[0] + "?" + urlParams.toString()
         }
     }
 
