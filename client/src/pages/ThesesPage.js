@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import NavigationBar from '../components/NavBar'
-import Card from 'react-bootstrap/Card'
+import NavigationBar from '../components/NavigationBar'
 import ToggleButton from 'react-bootstrap/ToggleButton'
+import Card from 'react-bootstrap/Card'
+import { Link } from "react-router-dom"
 
-const ThesesPage = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) =>
-    <>
-        <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
-        <Areas />
-        <Theses />
-    </>
+const ThesesPage = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) => {
+    const [checkedAreas, setCheckedAreas] = useState([])
 
-const Areas = () => {
+    return (
+        <>
+            <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
+            <Areas checkedAreas={checkedAreas} setCheckedAreas={setCheckedAreas} />
+            <Theses checkedAreas={checkedAreas} />
+        </>
+    )
+}
+
+const Areas = ({ checkedAreas, setCheckedAreas }) => {
     const [areas, setAreas] = useState(null)
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
-
-    const [isCheckedArray, setIsCheckedArray] = useState(null)
 
     useEffect(() => {
         fetch('http://localhost:5000/areas')
             .then(res => res.json())
             .then(areasRes => {
                 setAreas(areasRes)
-
-                const urlParams = new URLSearchParams(window.location.search)
-                const urlAreaParams = urlParams.getAll("area")
-                console.log("urlAreaParams:", urlAreaParams)
-
-                let isCheckedArrayTemp = areasRes.map(area => urlAreaParams.includes(area.code) ? true : false)
-                console.log("isCheckedArrayTemp:", isCheckedArrayTemp)
-                setIsCheckedArray(isCheckedArrayTemp)
-
                 setIsLoaded(true)
             },
                 (err) => {
@@ -38,44 +33,28 @@ const Areas = () => {
                     setError(err)
                 }
             )
-    }, [])
-
-    const handleChange = index => {
-        const changedArea = areas[index].code
-        let isCheckedStateArrayNew = isCheckedArray.slice()
-        isCheckedStateArrayNew[index] = !isCheckedStateArrayNew[index]
-        setIsCheckedArray(isCheckedStateArrayNew)
-        if (isCheckedStateArrayNew[index]) {
-            const urlParams = new URLSearchParams(window.location.search)
-            const urlAreaParams = urlParams.getAll("area")
-            if (!urlAreaParams.includes(changedArea)) {
-                urlParams.append("area", areas[index].code)
-                console.log(urlParams.toString())
-                window.location.href = window.location.href.split('?')[0] + "?" + urlParams.toString()
-            }
-        }
-        if (!isCheckedStateArrayNew[index]) {
-            const urlParams = new URLSearchParams(window.location.search)
-            let urlAreaParams = urlParams.getAll("area")
-            let urlAreaParamsNew = urlAreaParams.filter(area => area !== changedArea)
-            urlParams.delete("area")
-            urlAreaParamsNew.forEach(areaParam => urlParams.append("area", areaParam))
-            console.log(urlParams.toString())
-            window.location.href = urlParams.toString() === "" ? window.location.href.split('?')[0] : window.location.href.split('?')[0] + "?" + urlParams.toString()
-        }
-    }
+    })
 
     if (!isLoaded) return <div>Loading...</div>
     if (error) return <div>Error: {error.message}</div>
     if (areas) return (
         <div style={{ display: "flex", justifyContent: "center", alignContent: "space-around", padding: "10px 10px 0 10px" }}>
             {
-                areas.map((area, index) =>
+                areas.map((area) =>
                     <ToggleButton
                         key={area.code}
                         type="checkbox"
-                        checked={isCheckedArray[index]}
-                        onChange={() => handleChange(index)}
+                        checked={checkedAreas.includes(area.code)}
+                        onChange={() => {
+                            if (!checkedAreas.includes(area.code)) {
+                                if (checkedAreas.length === 0 || checkedAreas.length === 1)
+                                    setCheckedAreas([...checkedAreas, area.code])
+                                if (checkedAreas.length === 2)
+                                    setCheckedAreas([checkedAreas[1], area.code])
+                            }
+                            if (checkedAreas.includes(area.code))
+                                setCheckedAreas(checkedAreas.filter(a => a !== area.code))
+                        }}
                         style={{ margin: "10px", width: "15rem", display: "flex", justifyContent: "center", alignItems: "center" }}
                     >
                         {area.long}
@@ -86,14 +65,14 @@ const Areas = () => {
     )
 }
 
-const Theses = () => {
+const Theses = ({ checkedAreas }) => {
     const [classifiedTheses, setClassifiedTheses] = useState(null)
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search)
-        fetch('http://localhost:5000/theses' + '?' + urlParams.toString())
+        console.log('http://localhost:5000/theses/' + checkedAreas.join("/"))
+        fetch('http://localhost:5000/theses/' + checkedAreas.join("/"))
             .then(res => res.json())
             .then(res => {
                 setClassifiedTheses(res)
@@ -104,13 +83,13 @@ const Theses = () => {
                     setError(err)
                 }
             )
-    }, [])
+    }, [checkedAreas])
 
     if (!isLoaded) return <div>Loading...</div>
     if (error) return <div>Error: {error.message}</div>
     if (classifiedTheses) return (
         <>
-            <h1 style={{ textAlign: "center", margin: 0 }}>{classifiedTheses.length} Propostas de Tese</h1>
+            <h1 style={{ textAlign: "center", margin: 0 }}>{classifiedTheses.length} Thesis Proposals</h1>
             <div style={{ display: "flex", justifyContent: "center", alignContent: "space-around", flexWrap: "wrap", padding: "0 10px 10px 10px" }}>
                 {
                     classifiedTheses.map(thesis =>
@@ -132,7 +111,7 @@ const ThesisCard = ({ id, title, area1, area2 }) =>
     <Card style={{ margin: "10px", width: "15rem", textAlign: "center" }}>
         <Card.Body>
             <Card.Title>{title}</Card.Title>
-            <a href={`/thesis/${id}`} className="stretched-link" target="_blank" rel="noreferrer" />
+            <Link className="stretched-link" to={`/thesis/${id}`} />
         </Card.Body>
     </Card >
 

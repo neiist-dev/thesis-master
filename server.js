@@ -2,7 +2,6 @@ const express = require('express')
 const cors = require('cors')
 const axios = require('axios')
 const path = require('path')
-//const { response } = require('express')
 require('dotenv').config()
 
 const theses = require('./data/meic_theses.json')
@@ -15,39 +14,28 @@ app.use(cors());
 /* https://github.com/hemakshis/Basic-MERN-Stack-App/blob/master/app.js */
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-const {
-    FENIX_CLIENT_ID,
-    FENIX_CLIENT_SECRET,
-    FENIX_REDIRECT_URI
-} = process.env
+const { FENIX_CLIENT_ID, FENIX_CLIENT_SECRET, FENIX_REDIRECT_URI } = process.env
 
 app.get('/login', (req, res) => {
-
-    const loginUrl =
+    res.send(
         'https://fenix.tecnico.ulisboa.pt/oauth/userdialog' +
         `?client_id=${FENIX_CLIENT_ID}` +
         `&redirect_uri=${FENIX_REDIRECT_URI}`
-    console.log("loginUrl:", loginUrl)
-
-    res.send(loginUrl)
+    )
 });
 
 app.get('/auth', async (req, res, next) => {
-
     const code = req.query.code
-    console.log("code:", code)
-
-    const accessTokenUrl =
-        'https://fenix.tecnico.ulisboa.pt/oauth/access_token' +
-        `?client_id=${FENIX_CLIENT_ID}` +
-        `&client_secret=${encodeURIComponent(FENIX_CLIENT_SECRET)}` +
-        `&redirect_uri=${FENIX_REDIRECT_URI}` +
-        `&code=${encodeURIComponent(code)}` +
-        '&grant_type=authorization_code'
-    console.log("accessTokenUrl:", accessTokenUrl)
 
     try {
-        var accessTokenResponse = await axios.post(accessTokenUrl)
+        var accessTokenResponse = await axios.post(
+            'https://fenix.tecnico.ulisboa.pt/oauth/access_token' +
+            `?client_id=${FENIX_CLIENT_ID}` +
+            `&client_secret=${encodeURIComponent(FENIX_CLIENT_SECRET)}` +
+            `&redirect_uri=${FENIX_REDIRECT_URI}` +
+            `&code=${encodeURIComponent(code)}` +
+            '&grant_type=authorization_code'
+        )
         if (accessTokenResponse === undefined || accessTokenResponse.status != 200) {
             console.log('accessTokenResponse is undefined or the status is not 200')
             return
@@ -59,15 +47,12 @@ app.get('/auth', async (req, res, next) => {
     }
 
     const accessToken = accessTokenResponse.data.access_token
-    console.log("accessToken:", accessToken)
-
-    const personInformationUrl =
-        'https://fenix.tecnico.ulisboa.pt/api/fenix/v1/person' +
-        `?access_token=${accessToken}`
-    console.log("personInformationUrl:", personInformationUrl)
 
     try {
-        var personInformationResponse = await axios.get(personInformationUrl)
+        var personInformationResponse = await axios.get(
+            'https://fenix.tecnico.ulisboa.pt/api/fenix/v1/person' +
+            `?access_token=${accessToken}`
+        )
         if (personInformationResponse === undefined || personInformationResponse.status != 200) {
             console.log('accessTokenResponse is undefined or the status is not 200')
             return
@@ -81,9 +66,6 @@ app.get('/auth', async (req, res, next) => {
     const personInformation = personInformationResponse
 
     const userName = personInformation.data.displayName
-    console.log("userName:", userName)
-
-    console.log("personInformation:", personInformation.data.roles)
 
     let isCurrentLMeicStudent = false
 
@@ -97,41 +79,31 @@ app.get('/auth', async (req, res, next) => {
         }
     })
 
-    console.log("isCurrentLMeicStudent:", isCurrentLMeicStudent)
-
     res.json({
         userName: userName,
         isCurrentLMeicStudent: isCurrentLMeicStudent
     })
 })
 
-app.get('/theses', (req, res) => {
-    let queryAreas = req.query.area
-    console.log("queryAreas:", queryAreas)
+app.get('/theses/:area1?/:area2?', (req, res) => {
+    const area1 = req.params.area1
+    const area2 = req.params.area2
 
-    if (queryAreas === undefined)
-        return res.json(theses)
+    const checkedAreas = []
+    if (area1 !== undefined) checkedAreas.push(area1)
+    if (area2 !== undefined) checkedAreas.push(area2)
 
-    if (!Array.isArray(queryAreas)) queryAreas = new Array(queryAreas)
-
-    const filteredTheses = theses.filter(thesis => queryAreas.every(area => thesis.areas.includes(area)))
-    console.log(filteredTheses)
-
+    const filteredTheses = theses.filter(thesis => checkedAreas.every(area => thesis.areas.includes(area)))
     return res.json(filteredTheses)
 })
 
 app.get('/thesis/:id', (req, res) => {
     const id = req.params.id
-    console.log("id:", id)
-
     let particularThesis = theses.find(thesis => thesis.id === id)
-    console.log(particularThesis)
-
     res.json(particularThesis)
 })
 
 app.get('/areas', (req, res) => {
-    //console.log(areas)
     res.json(areas)
 })
 

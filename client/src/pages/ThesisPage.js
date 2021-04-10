@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import NavigationBar from '../components/NavBar'
+import NavigationBar from '../components/NavigationBar'
 import Card from 'react-bootstrap/Card'
 import { useParams } from "react-router-dom"
 
 const ThesisPage = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) => {
     const { id } = useParams()
+
     return (
         <>
             <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
