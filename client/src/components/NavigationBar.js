@@ -57,7 +57,7 @@ const Login = () => {
           setError(err)
         }
       )
-  })
+  }, [])
 
   if (!isLoaded)
     return <div>LOGIN</div>
@@ -86,7 +86,7 @@ const CheckPermissions = ({ code, setIsLoggedIn, setUserName }) => {
           setError(err)
         }
       )
-  })
+  }, [])
 
   if (!isLoaded)
     return <div>Loading...</div>

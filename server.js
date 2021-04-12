@@ -70,7 +70,6 @@ app.get('/auth', async (req, res, next) => {
     let isCurrentLMeicStudent = false
 
     personInformation.data.roles.forEach(role => {
-        console.log("role.registrations:", role.registrations)
         if (role.registrations) {
             role.registrations.forEach(registration => {
                 if (registration.acronym && ['LEIC-A', 'LEIC-T', 'MEIC'].includes(registration.acronym))

@@ -33,7 +33,7 @@ const Areas = ({ checkedAreas, setCheckedAreas }) => {
                     setError(err)
                 }
             )
-    })
+    }, [])
 
     if (!isLoaded) return <div>Loading...</div>
     if (error) return <div>Error: {error.message}</div>
