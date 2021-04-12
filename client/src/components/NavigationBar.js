@@ -74,12 +74,10 @@ const CheckPermissions = ({ code, setIsLoggedIn, setUserName }) => {
 
   useEffect(() => {
     fetch(`http://localhost:5000/auth?code=${code}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.isCurrentLMeicStudent) {
-          setUserName(data.userName)
-          setIsLoggedIn(true)
-        }
+      .then(res => res.text())
+      .then(userName => {
+        setUserName(userName)
+        setIsLoggedIn(true)
       },
         (err) => {
           setIsLoaded(true)

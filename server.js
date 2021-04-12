@@ -8,80 +8,45 @@ const theses = require('./data/meic_theses.json')
 const areas = require('./data/meic_areas.json')
 
 const app = express();
-
 app.use(cors());
-
-/* https://github.com/hemakshis/Basic-MERN-Stack-App/blob/master/app.js */
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')))   //https://github.com/hemakshis/Basic-MERN-Stack-App/blob/master/app.js
 
 const { FENIX_CLIENT_ID, FENIX_CLIENT_SECRET, FENIX_REDIRECT_URI } = process.env
 
-app.get('/login', (req, res) => {
+app.get('/login', (req, res) =>
     res.send(
         'https://fenix.tecnico.ulisboa.pt/oauth/userdialog' +
         `?client_id=${FENIX_CLIENT_ID}` +
         `&redirect_uri=${FENIX_REDIRECT_URI}`
     )
-});
+)
 
 app.get('/auth', async (req, res, next) => {
-    const code = req.query.code
-
     try {
         var accessTokenResponse = await axios.post(
             'https://fenix.tecnico.ulisboa.pt/oauth/access_token' +
             `?client_id=${FENIX_CLIENT_ID}` +
             `&client_secret=${encodeURIComponent(FENIX_CLIENT_SECRET)}` +
             `&redirect_uri=${FENIX_REDIRECT_URI}` +
-            `&code=${encodeURIComponent(code)}` +
+            `&code=${encodeURIComponent(req.query.code)}` +
             '&grant_type=authorization_code'
         )
-        if (accessTokenResponse === undefined || accessTokenResponse.status != 200) {
-            console.log('accessTokenResponse is undefined or the status is not 200')
-            return
-        }
-    } catch (error) {
-        console.log('axios.post(accessTokenUrl) failed')
-        console.log(error)
-        return
-    }
 
-    const accessToken = accessTokenResponse.data.access_token
+        if (accessTokenResponse === undefined || accessTokenResponse.status != 200)
+            return console.log('accessTokenResponse is undefined or the status is not 200')
 
-    try {
         var personInformationResponse = await axios.get(
             'https://fenix.tecnico.ulisboa.pt/api/fenix/v1/person' +
-            `?access_token=${accessToken}`
+            `?access_token=${accessTokenResponse.data.access_token}`
         )
-        if (personInformationResponse === undefined || personInformationResponse.status != 200) {
-            console.log('accessTokenResponse is undefined or the status is not 200')
-            return
-        }
+
+        if (personInformationResponse === undefined || personInformationResponse.status != 200)
+            return console.log('personInformationResponse is undefined or the status is not 200')
     } catch (error) {
-        console.log('axios.get(personInformationUrl) failed')
-        console.log(error)
-        return
+        return console.log(error)
     }
 
-    const personInformation = personInformationResponse
-
-    const userName = personInformation.data.displayName
-
-    let isCurrentLMeicStudent = false
-
-    personInformation.data.roles.forEach(role => {
-        if (role.registrations) {
-            role.registrations.forEach(registration => {
-                if (registration.acronym && ['LEIC-A', 'LEIC-T', 'MEIC'].includes(registration.acronym))
-                    isCurrentLMeicStudent = true
-            })
-        }
-    })
-
-    res.json({
-        userName: userName,
-        isCurrentLMeicStudent: isCurrentLMeicStudent
-    })
+    res.send(personInformationResponse.data.displayName)
 })
 
 app.get('/theses/:area1?/:area2?', (req, res) => {
@@ -92,20 +57,17 @@ app.get('/theses/:area1?/:area2?', (req, res) => {
     if (area1 !== undefined) checkedAreas.push(area1)
     if (area2 !== undefined) checkedAreas.push(area2)
 
-    const filteredTheses = theses.filter(thesis => checkedAreas.every(area => thesis.areas.includes(area)))
-    return res.json(filteredTheses)
+    res.json(theses.filter(thesis => checkedAreas.every(area => thesis.areas.includes(area))))
 })
 
-app.get('/thesis/:id', (req, res) => {
-    const id = req.params.id
-    let particularThesis = theses.find(thesis => thesis.id === id)
-    res.json(particularThesis)
-})
+app.get('/thesis/:id', (req, res) =>
+    res.json(theses.find(thesis => thesis.id === req.params.id))
+)
 
-app.get('/areas', (req, res) => {
+app.get('/areas', (req, res) =>
     res.json(areas)
-})
+)
 
-app.listen(5000, async () => {
+app.listen(5000, () =>
     console.log('App is running on port 5000.')
-})
+)
