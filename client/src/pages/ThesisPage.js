@@ -3,12 +3,12 @@ import NavigationBar from '../components/NavigationBar'
 import Card from 'react-bootstrap/Card'
 import { useParams } from "react-router-dom"
 
-const ThesisPage = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) => {
+const ThesisPage = ({ userData, setUserData }) => {
     const { id } = useParams()
 
     return (
         <>
-            <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
+            <NavigationBar userData={userData} setUserData={setUserData}  />
             <Thesis id={id} />
         </>
     )

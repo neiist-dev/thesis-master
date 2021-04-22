@@ -4,12 +4,12 @@ import ToggleButton from 'react-bootstrap/ToggleButton'
 import Card from 'react-bootstrap/Card'
 import { Link } from "react-router-dom"
 
-const ThesesPage = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) => {
+const ThesesPage = ({ userData, setUserData }) => {
     const [checkedAreas, setCheckedAreas] = useState([])
 
     return (
         <>
-            <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
+            <NavigationBar userData={userData} setUserData={setUserData} />
             <Areas checkedAreas={checkedAreas} setCheckedAreas={setCheckedAreas} />
             <Theses checkedAreas={checkedAreas} />
         </>
@@ -71,7 +71,6 @@ const Theses = ({ checkedAreas }) => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
-        console.log('http://localhost:5000/theses/' + checkedAreas.join("/"))
         fetch('http://localhost:5000/theses/' + checkedAreas.join("/"))
             .then(res => res.json())
             .then(res => {

@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'client/build'))) //https://github.com/hemakshis/Basic-MERN-Stack-App/blob/master/app.js
 
-app.get('/auth', async (req, res, next) => {
+app.get('/auth', async (req, res) => {
     try {
         var accessTokenResponse = await axios.post(
             'https://fenix.tecnico.ulisboa.pt/oauth/access_token' +
@@ -36,7 +36,7 @@ app.get('/auth', async (req, res, next) => {
         return console.log(error)
     }
 
-    res.send(personInformationResponse.data.displayName)
+    res.send(personInformationResponse.data)
 })
 
 app.get('/theses/:area1?/:area2?', (req, res) => {

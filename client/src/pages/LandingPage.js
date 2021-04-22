@@ -2,9 +2,9 @@ import React from 'react'
 import NavigationBar from '../components/NavigationBar'
 import logo from '../images/logo-colors-dark-background.png'
 
-const LandingPage = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) =>
+const LandingPage = ({ userData, setUserData }) =>
     <div style={{ width: "100%", height: "100vh", backgroundColor: "#6DA5FF" }}>
-        <NavigationBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
+        <NavigationBar userData={userData} setUserData={setUserData} />
         <img
             style={{
                 position: "fixed",

@@ -12,23 +12,22 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [userName, setUserName] = useState(null)
+  const [userData, setUserData] = useState(null)
 
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <LandingPage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
+          <LandingPage userData={userData} setUserData={setUserData}/>
         </Route>
-        {isLoggedIn &&
+        {userData &&
           <Route path="/theses">
-            <Theses isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
+            <Theses userData={userData} setUserData={setUserData} />
           </Route>
         }
-        {isLoggedIn &&
+        {userData &&
           <Route path="/thesis/:id">
-            <Thesis isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
+            <Thesis userData={userData} setUserData={setUserData} />
           </Route>
         }
         <Route path="*">

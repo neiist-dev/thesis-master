@@ -4,38 +4,38 @@ import Nav from 'react-bootstrap/Nav'
 import logo from '../images/logo-color.png'
 import { Redirect, Link } from "react-router-dom"
 
-const NavigationBar = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) =>
+const NavigationBar = ({ userData, setUserData }) =>
   <Navbar bg="light" expand="lg">
     <Navbar.Brand as={Link} to="/">
       <img src={logo} width="40" height="40" alt="" />
     </Navbar.Brand>
     <Navbar.Toggle />
     <Navbar.Collapse>
-      {isLoggedIn &&
+      {userData &&
         <Nav style={{ marginRight: "auto" }}>
           <Nav.Link as={Link} to="/theses">THESIS MASTER</Nav.Link>
         </Nav>
       }
       <Nav style={{ marginLeft: "auto" }}>
-        <LoginLogout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
+        <LoginLogout userData={userData} setUserData={setUserData}/>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
 
-const LoginLogout = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) => {
+const LoginLogout = ({ userData, setUserData }) => {
   const urlParams = new URLSearchParams(window.location.search)
 
-  if (urlParams.has("code") && isLoggedIn)
+  if (urlParams.has("code") && userData)
     return <Redirect to="/theses" />
 
   if (urlParams.has("code"))
-    return <CheckPermissions code={urlParams.get("code")} setIsLoggedIn={setIsLoggedIn} setUserName={setUserName} />
+    return <CheckPermissions code={urlParams.get("code")} setUserData={setUserData} />
 
   if (urlParams.has("error"))
     return <Error error={urlParams.get("error")} errorDescription={urlParams.get("error_description")} />
 
-  if (isLoggedIn)
-    return <Logout setIsLoggedIn={setIsLoggedIn} userName={userName} setUserName={setUserName} />
+  if (userData)
+    return <Logout userData={userData} setUserData={setUserData} />
 
   return <Login />
 }
@@ -50,16 +50,15 @@ const Login = () =>
   </Nav.Link>
 
 
-const CheckPermissions = ({ code, setIsLoggedIn, setUserName }) => {
+const CheckPermissions = ({ code, setUserData }) => {
   const [error, setError] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     fetch(`http://localhost:5000/auth?code=${code}`)
-      .then(res => res.text())
-      .then(userName => {
-        setUserName(userName)
-        setIsLoggedIn(true)
+      .then(res => res.json())
+      .then(userData => {
+        setUserData(userData)
       },
         (err) => {
           setIsLoaded(true)
@@ -75,15 +74,12 @@ const CheckPermissions = ({ code, setIsLoggedIn, setUserName }) => {
     return <div>Error: {error.message}</div>
 }
 
-const Logout = ({ setIsLoggedIn, userName, setUserName }) =>
+const Logout = ({ userData, setUserData }) =>
   <>
-    <Nav.Link>{userName}</Nav.Link>
+    <Nav.Link>{userData.displayName}</Nav.Link>
     <Nav.Link as={Link}
       to="/"
-      onClick={() => {
-        setUserName(false)
-        setIsLoggedIn(false)
-      }}
+      onClick={() => setUserData(null)}
     >
       LOGOUT
     </Nav.Link>
