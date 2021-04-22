@@ -9,25 +9,15 @@ const areas = require('./data/meic_areas.json')
 
 const app = express();
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'client/build')))   //https://github.com/hemakshis/Basic-MERN-Stack-App/blob/master/app.js
-
-const { FENIX_CLIENT_ID, FENIX_CLIENT_SECRET, FENIX_REDIRECT_URI } = process.env
-
-app.get('/login', (req, res) =>
-    res.send(
-        'https://fenix.tecnico.ulisboa.pt/oauth/userdialog' +
-        `?client_id=${FENIX_CLIENT_ID}` +
-        `&redirect_uri=${FENIX_REDIRECT_URI}`
-    )
-)
+app.use(express.static(path.join(__dirname, 'client/build'))) //https://github.com/hemakshis/Basic-MERN-Stack-App/blob/master/app.js
 
 app.get('/auth', async (req, res, next) => {
     try {
         var accessTokenResponse = await axios.post(
             'https://fenix.tecnico.ulisboa.pt/oauth/access_token' +
-            `?client_id=${FENIX_CLIENT_ID}` +
-            `&client_secret=${encodeURIComponent(FENIX_CLIENT_SECRET)}` +
-            `&redirect_uri=${FENIX_REDIRECT_URI}` +
+            `?client_id=${process.env.FENIX_CLIENT_ID}` +
+            `&client_secret=${encodeURIComponent(process.env.FENIX_CLIENT_SECRET)}` +
+            `&redirect_uri=${process.env.FENIX_REDIRECT_URI}` +
             `&code=${encodeURIComponent(req.query.code)}` +
             '&grant_type=authorization_code'
         )

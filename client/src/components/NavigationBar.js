@@ -40,33 +40,15 @@ const LoginLogout = ({ isLoggedIn, setIsLoggedIn, userName, setUserName }) => {
   return <Login />
 }
 
-const Login = () => {
-  const [loginUrl, setLoginUrl] = useState(null)
-  const [error, setError] = useState(null)
-  const [isLoaded, setIsLoaded] = useState(false)
+const Login = () =>
+  <Nav.Link
+    href={'https://fenix.tecnico.ulisboa.pt/oauth/userdialog' +
+        `?client_id=${process.env.REACT_APP_FENIX_CLIENT_ID}` +
+        `&redirect_uri=${process.env.REACT_APP_FENIX_REDIRECT_URI}`}
+  >
+    LOGIN
+  </Nav.Link>
 
-  useEffect(() => {
-    fetch('http://localhost:5000/login')
-      .then(res => res.text())
-      .then(res => {
-        setLoginUrl(res)
-        setIsLoaded(true)
-      },
-        (err) => {
-          setIsLoaded(true)
-          setError(err)
-        }
-      )
-  }, [])
-
-  if (!isLoaded)
-    return <div>LOGIN</div>
-
-  if (error)
-    return <div>Error: {error.message}</div>
-
-  return <Nav.Link href={loginUrl}>LOGIN</Nav.Link>
-}
 
 const CheckPermissions = ({ code, setIsLoggedIn, setUserName }) => {
   const [error, setError] = useState(null)
