@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
-} from "react-router-dom"
+} from 'react-router-dom'
+
 import LandingPage from './pages/LandingPage'
 import Theses from './pages/ThesesPage'
 import Thesis from './pages/ThesisPage'
