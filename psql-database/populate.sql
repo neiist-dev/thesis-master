@@ -18,13 +18,6 @@ INSERT INTO area_course
     VALUES ('g', 'meic-t');
 
 
-INSERT INTO thesis_course
-    VALUES (17992, 'meic-a');
-
-INSERT INTO thesis_course
-    VALUES (17992, 'meic-t');
-
-
 INSERT INTO theses
     VALUES (17992, 'Project: A Framework for ML Ops',
             '{"Luis Marques luis.marques@linkredglue.com (50%)", "Pedro Manuel Moreira Vaz Antunes de Sousa (50%)"}',
@@ -36,3 +29,10 @@ INSERT INTO theses
             'Conhecimentos Python e Spark',
             'lit',
             'g');
+
+
+INSERT INTO thesis_course
+    VALUES (17992, 'meic-a');
+
+INSERT INTO thesis_course
+    VALUES (17992, 'meic-t');

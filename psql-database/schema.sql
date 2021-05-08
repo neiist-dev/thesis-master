@@ -1,3 +1,6 @@
+-- this database needs to have the western europe encoding
+-- CREATE DATABASE thesis_master WITH ENCODING 'WIN1252' TEMPLATE=template0;
+
 DROP TABLE IF EXISTS courses CASCADE;
 CREATE TABLE courses (
     code varchar(10) PRIMARY KEY,
